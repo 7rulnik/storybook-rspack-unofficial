@@ -1,6 +1,6 @@
-import { babelParser, getAutomockCode } from 'storybook/internal/mocking-utils';
-
 import type { LoaderContext } from '@rspack/core';
+
+import { getAutomockCode } from '../mocking-utils.js';
 
 /** Defines the options that can be passed to the rspack-automock-loader. */
 interface AutomockLoaderOptions {
@@ -26,7 +26,7 @@ export default function rspackAutomockLoader(
   const options = this.getOptions();
   const isSpy = options.spy === 'true';
 
-  const mocked = getAutomockCode(source, isSpy, babelParser as any);
+  const mocked = getAutomockCode(source, isSpy, this.resourcePath);
 
   return mocked.toString();
 }
